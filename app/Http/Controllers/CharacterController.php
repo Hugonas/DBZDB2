@@ -31,6 +31,8 @@ class CharacterController extends Controller
     public function create()
     {
         //
+        return view('createCharacter');
+
     }
 
     /**
@@ -42,6 +44,16 @@ class CharacterController extends Controller
     public function store(Request $request)
     {
         //
+        // $this->validateRequest($request);
+$validateData = $request->validate([
+  'name' => 'required',
+  'race' => 'required',
+  'power_level' =>'max:10000',
+  'description' => 'required'
+]);
+
+        $post = $request->except('_token');
+        Character::create($post);
     }
 
     /**
